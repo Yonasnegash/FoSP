@@ -4,13 +4,18 @@ from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 
 def index(request):
     contribution = Contribution.objects.all()
+
+    paginator = Paginator(contribution, 1)
+    page = request.GET.get('page')
+    paged_contributions = paginator.get_page(page)
+
     
     paginator = Paginator(contribution, 1)
     page = request.GET.get('page')
     paged_contributions = paginator.get_page(page)
 
     context = {
-        'contributions': paged_contributions
+        'contribution': paged_contributions
     }
 
     return render(request, 'pages/index.html', context)
