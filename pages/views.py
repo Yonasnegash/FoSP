@@ -1,7 +1,14 @@
 from django.shortcuts import render
+from contribution.models import Contribution
 
 def index(request):
-    return render(request, 'pages/index.html')
+    contribution = Contribution.objects.all()
+    
+    context = {
+        'contributions': contribution
+    }
+
+    return render(request, 'pages/index.html', context)
 
 def about(request):
     return render(request, 'pages/about.html')
