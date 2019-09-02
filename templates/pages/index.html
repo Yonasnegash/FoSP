@@ -3,8 +3,8 @@
 {% block content %}
     
     <!-- Page Header -->
-  <header class="masthead">
-    <div class="overlay"></div>
+  <header class="masthead" style="background-image: url({% static 'img/about-bg.jpg' %})"> 
+    <div class="overlay"></div> 
     <div class="container">
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
@@ -53,6 +53,7 @@
                 <h2 class="post-title">
                   {{ cont.title }}
                 </h2>
+                <img src="{{ cont.photo.url }}" alt="test" style="width: 700px; height: 422px; margin-bottom: 20px;" />
                 <h5 class="post-subtitle">
                   {{ cont.description }}
                 </h5>
@@ -69,10 +70,6 @@
               <p>No Contributions Yet</p>
           </div>
         {% endif %}
-
-
-
-
 
 
 
