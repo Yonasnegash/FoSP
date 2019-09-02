@@ -19,7 +19,31 @@
     <!-- Main Content -->
   <div class="container">
     <div class="row">
-      <div class="col-lg-8 col-md-10 mx-auto">
+      <div class="col-md-4">
+          <div class="wrapper">
+              <!-- Sidebar -->
+              <nav id="sidebar">
+                  <div class="sidebar-header">
+                      <h3>Support Us</h3>
+                  </div>
+          
+                  <ul class="list-unstyled components">
+                      <p>Friends of Space Program</p>
+                      <li>
+                          <a href="#" class="active">Projects</a>
+                      </li>
+                      <li>
+                          <a href="#">Join</a>
+                      </li>
+                      <li>
+                          <a href="#">Contact</a>
+                      </li>
+                  </ul>
+              </nav>
+          
+          </div>
+      </div>
+      <div class="col-md-8">
 
         {% if contribution %}
           {% for cont in contribution %}
@@ -29,13 +53,14 @@
                 <h2 class="post-title">
                   {{ cont.title }}
                 </h2>
-                <h3 class="post-subtitle">
+                <h5 class="post-subtitle">
                   {{ cont.description }}
-                </h3>
+                </h5>
               </a>
               <p class="post-meta">Posted by
                 <a href="#">{{ user.first_name }}</a>
                 on {{ cont.post_date }}</p>
+                <a href="#" class="btn btn-primary" style="color: #ffffff">See More</a>
             </div>
 
           {% endfor %}
