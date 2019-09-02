@@ -41,7 +41,7 @@
               <p class="post-meta">Posted by
                 <a href="#">{{ user.first_name }}</a>
                 on {{ cont.post_date }}</p>
-                <a href="#" class="btn btn-primary" style="color: #ffffff">See More</a>
+                <a href="{% url 'contribution' cont.id %}" class="btn btn-primary" style="color: #ffffff">See More</a>
             </div>
 
           {% endfor %}
