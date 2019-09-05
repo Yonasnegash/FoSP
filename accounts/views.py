@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages, auth
 from django.contrib.auth.models import User
+from contribution.models import Contribution
+from categories.models import Categories
 
 def register(request):
     if request.method == 'POST':
@@ -59,4 +61,27 @@ def logout(request):
         return 
 
 def dashboard(request):
-    return render(request, 'accounts/dashboard.html')
+    # object_list = Categories.objects.all()
+    # context = {
+    #     'object_list': object_list
+    # }
+    # return render(request, 'accounts/dashboard.html', context)
+
+    if request.method == 'POST':
+        user_id = request.POST['user_id']
+        category_id = request.POST['category_id']
+        title = request.POST['title']
+        description = request.POST['description']
+        photo = request.POST['photo']
+
+        contribution = Contribution(category_id=category_id, user_id=user_id, title=title, description=description, photo=photo)
+        if contribution.save():
+            print("Hello") 
+        else:
+            print("Fuck")
+
+        messages.success(request, 'You have submitted your contribution')
+        return redirect(request, 'accounts/dashboard.html')
+    # return render(request, 'accounts/dashboard.html')
+    else:
+        return render(request, 'accounts/dashboard.html')

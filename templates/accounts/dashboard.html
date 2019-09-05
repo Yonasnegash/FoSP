@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% block title %} | Dashboard {% endblock %}
 {% block content %}
     <!-- Page Header -->
   <header class="masthead" style="background-image: url({% static 'img/slider2.jpg' %})">
@@ -15,21 +16,83 @@
       </div>
     </div>
   </header>
-
+  <!-- Alert -->
+  {% include 'partials/_alerts.html' %}
   <!-- Main Content -->
-  <div class="container">
-    <div class="row">
-      <div class="col-md-4">
-        <!--sidebar-->
-        {% include 'partials/_sidebar.html  ' %}
+  
+    <div class="row" style="margin-left: 10px; margin-right: 10px;">
+      <div class="col-md-6">
+        <!--Table-->
+        <h2>Your contribution Lists</h2>
+        <hr>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">First</th>
+              <th scope="col">Last</th>
+              <th scope="col">Handle</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">1</th>
+              <td>Mark</td>
+              <td>Otto</td>
+              <td>@mdo</td>
+            </tr>
+            <tr>
+              <th scope="row">2</th>
+              <td>Jacob</td>
+              <td>Thornton</td>
+              <td>@fat</td>
+            </tr>
+            <tr>
+              <th scope="row">3</th>
+              <td>Larry</td>
+              <td>the Bird</td>
+              <td>@twitter</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-      <div class="col-lg-8">
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe nostrum ullam eveniet pariatur voluptates odit, fuga atque ea nobis sit soluta odio, adipisci quas excepturi maxime quae totam ducimus consectetur?</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius praesentium recusandae illo eaque architecto error, repellendus iusto reprehenderit, doloribus, minus sunt. Numquam at quae voluptatum in officia voluptas voluptatibus, minus!</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut consequuntur magnam, excepturi aliquid ex itaque esse est vero natus quae optio aperiam soluta voluptatibus corporis atque iste neque sit tempora!</p>
+      <div class="col-lg-6">
+        <!-- Add Contribution -->
+        <h2>You can add your Contribution here</h2>
+        <hr>
+        <form action="{% url 'dashboard' %}" method="POST">
+          {% csrf_token %}
+          {% if user.is_authenticated %}
+            <input type="hidden" name="user_id" value="{{ user.id }}">
+          {% else %}
+          <input type="hidden" name="user_id" value="0">
+          {% endif %}
+          <div class="form-group">
+                <label for="exampleFormControlSelect1">Choose Category</label>
+                <select name="category" class="form-control">
+                    <!-- {% for category in object_list %}
+                      <option value="{{ category.id }} ">{{ category.cat_title }}</option>
+                      
+                    {% endfor %} -->
+                    <option value="4">Space program</option>
+                </select>
+            </div>
+          <div class="form-group">
+            <input type="text" class="form-control" name="title" placeholder="contribution title">
+          </div>
+          <div class="form-group">
+            <label for="exampleFormControlTextarea1">Description</label>
+            <textarea class="form-control" rows="3" name="description"></textarea>
+          </div>
+            <div class="form-group">
+              <label for="exampleFormControlFile1">Add Image (Optional)</label>
+              <input type="file" accept="image/*" class="form-control-file" name="photo">
+            </div>
+            <button class="btn btn-primary" type="submit" style="position: relative; left: 500px;">Submit</button>
+        </form>
       </div>
     </div>
-  </div>
+  
 
   <hr>
 {% endblock %}
