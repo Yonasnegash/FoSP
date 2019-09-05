@@ -3,6 +3,21 @@
 {% block title %} | Register {% endblock %}
 {% block content %}
 
+<!-- Page Header -->
+<header class="masthead" style="height: 60px;background-image: url({% static 'img/slider2.jpg' %})">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="page-heading">
+            <h1>Projects</h1>
+            <span class="subheading">Contribute to our projects.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
     <div class="container" style="margin-top: 80px">
         <div class="col-md-5 mx-auto">
             <!-- Alert -->
@@ -46,7 +61,7 @@
                         
                       </form>
                       <p> If you already have an account, You can
-                        <a href="#">Login</a>
+                        <a href="{% url 'login' %}">Login</a>
                         here
                       </p>
         </div>

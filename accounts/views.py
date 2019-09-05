@@ -60,28 +60,31 @@ def logout(request):
     else:
         return 
 
-def dashboard(request):
-    # object_list = Categories.objects.all()
-    # context = {
-    #     'object_list': object_list
-    # }
-    # return render(request, 'accounts/dashboard.html', context)
+# def dashboard_cat(request):
+#     object_list = Categories.objects.all()
+#     context = {
+#         'object_list': object_list
+#     }
+#     return render(request, 'accounts/dashboard.html', context)
 
+def dashboard(request):
+    object_list = Contribution.objects.order_by('-post_date').filter(user_id=request.user.id)
+    context = {
+        'object_list': object_list
+    }
+    return render(request, 'accounts/dashboard.html')
     if request.method == 'POST':
         user_id = request.POST['user_id']
-        category_id = request.POST['category_id']
+        category = request.POST['category']
         title = request.POST['title']
         description = request.POST['description']
         photo = request.POST['photo']
 
-        contribution = Contribution(category_id=category_id, user_id=user_id, title=title, description=description, photo=photo)
-        if contribution.save():
-            print("Hello") 
-        else:
-            print("Fuck")
+        contribution = Contribution(category_id=category, user_id=user_id, title=title, description=description, photo=photo)
+        contribution.save()
 
         messages.success(request, 'You have submitted your contribution')
-        return redirect(request, 'accounts/dashboard.html')
+        return render(request, 'accounts/dashboard.html')
     # return render(request, 'accounts/dashboard.html')
     else:
         return render(request, 'accounts/dashboard.html')

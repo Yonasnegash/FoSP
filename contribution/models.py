@@ -7,7 +7,7 @@ class Contribution(models.Model):
     category = models.ForeignKey(Categories, on_delete=models.DO_NOTHING, default="")
     title = models.CharField(max_length=200)
     description = models.TextField(blank=True)
-    photo = models.ImageField(upload_to='photos/%Y/%m/%d/')
+    photo = models.ImageField(upload_to='photos/%Y/%m/%d/',)
     is_published = models.BooleanField(default=False)
     post_date = models.DateTimeField(default=datetime.now)
     def __str__(self):

@@ -8,13 +8,17 @@
             <ul class="list-unstyled components">
                 <p>Friends of Ethiopian Space Program</p>
                 <li>
-                    <a href="#" class="active">Projects</a>
+                    <a href="{% url 'projects' %}" class="active">Projects</a>
                 </li>
+                {% if user.is_authenticated %}
+
+                {% else %}
+                    <li>
+                        <a href="{% url 'login' %}">Join</a>
+                    </li>
+                {% endif %}
                 <li>
-                    <a href="#">Join</a>
-                </li>
-                <li>
-                    <a href="#">Contact</a>
+                    <a href="{% url 'about' %}">About</a>
                 </li>
             </ul>
         </nav>

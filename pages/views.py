@@ -24,6 +24,9 @@ def index(request):
 def about(request):
     return render(request, 'pages/about.html')
 
+def projects(request):
+    return render(request, 'pages/projects.html')
+
 def contribution(request, contribution_id):
     contribution = get_object_or_404(Contribution, pk=contribution_id)
     context = {
